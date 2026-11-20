@@ -41,3 +41,16 @@ example
 # generated native folders
 /ios
 /android
+
+# Playwright
+test-results/
+e2e/report/
+e2e/device-shots/
+
+#Plan File
+plans
+e2e/report-native/
+
+# local AI tooling
+.claude/
+AGENTS.md

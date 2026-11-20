@@ -1,65 +1,66 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://unistyl.es/), etc.
- */
-
-import '@/global.css';
-
-import { Platform } from 'react-native';
-
+/** Skillio design tokens. Brand teal #08A4B3 + white, warm accents for energy. */
 export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+  teal: '#08A4B3',
+  tealDeep: '#067F8B',
+  tealBright: '#0BC3D3',
+  tealLight: '#E6F7F9',
+  tealFaint: '#F3FBFC',
+  ink: '#0B2E35',
+  ink2: '#4A6168',
+  ink3: '#8AA0A6',
+  line: '#E3EEF0',
+  canvas: '#F4F9FA',
+  card: '#FFFFFF',
+  muted: '#EEF3F4',
+  sun: '#FFC23C',
+  sunDeep: '#D99A12',
+  sunLight: '#FFF7E0',
+  sunText: '#7A5300',
+  coral: '#FF7A59',
+  coralDeep: '#D85A3A',
+  coralLight: '#FFF0EB',
+  coralText: '#C2410C',
+  mint: '#16B26B',
+  mintDeep: '#0E8A51',
+  mintLight: '#E5F8EE',
+  violet: '#7C5CFF',
+  violetDeep: '#5A3BE0',
+  violetLight: '#F0ECFF',
+  rose: '#F0446B',
+  roseDeep: '#C32A4E',
+  roseLight: '#FFE7EC',
+  white: '#FFFFFF',
+} as const;
+
+export type ColorName = keyof typeof Colors;
+
+export const Spacing = { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 28 } as const;
+
+export const Radius = { sm: 12, md: 16, lg: 22, xl: 26, pill: 999 } as const;
+
+export const Fonts = {
+  regular: 'PlusJakartaSans_500Medium',
+  semibold: 'PlusJakartaSans_600SemiBold',
+  bold: 'PlusJakartaSans_700Bold',
+  heavy: 'PlusJakartaSans_800ExtraBold',
+} as const;
+
+export const Shadow = {
+  card: {
+    shadowColor: Colors.ink,
+    shadowOpacity: 0.06,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+  hero: {
+    shadowColor: Colors.teal,
+    shadowOpacity: 0.32,
+    shadowRadius: 22,
+    shadowOffset: { width: 0, height: 12 },
+    elevation: 8,
   },
 } as const;
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
-
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
-
-export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
-} as const;
-
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
+/** Content is centred and capped on web/tablets so it keeps a phone-like rhythm. */
+export const MaxContentWidth = 480;

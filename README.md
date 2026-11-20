@@ -1,56 +1,54 @@
-# Welcome to your Expo app 👋
+# Skillio — Home Screen
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Home screen for an English-learning app for students aged 10–20, built with React Native (Expo SDK 58), Expo Router and Reanimated.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+In development, tap **🧪 States** (bottom right) to switch between demo states. On web you can also open a state directly, for example `/?state=noLessons`.
 
-### Other setup steps
+## Project structure
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```
+src/
+├── app/                      # routes: _layout, index (home), practice
+├── screens/Authenticated/    # HomeScreen, PracticeScreen
+├── features/
+│   ├── home/                 # types, mock data, store + home components
+│   └── practice/             # questions + answer option
+├── components/               # reusable UI: AppText, Button, ButtonRow, Card, Badge,
+│                             # ProgressRing, AnimatedBar, CountUpText, Confetti, EmptyState
+├── hooks/                    # useCountdown, useCountUp, useGreeting, useMotion, useResponsive
+├── constants/theme.ts        # colors, spacing, radii, fonts
+└── utils/                    # helpers
+```
 
-## Learn more
+## States
 
-To learn more about developing your project with Expo, look at the following resources:
+| State | What it shows |
+|---|---|
+| `classSoon` | Class countdown with Join, practice not done yet |
+| `noClassDone` | Book a class, practice done with View results |
+| `live` | Class is live with a Join now button |
+| `newStudent` | No skill data yet, placement check prompt |
+| `noLessons` | No lessons left, Add lessons |
+| `noSubscription` | No active plan, free-trial upsell |
+| `expired` | Plan expired, Renew |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Added fields
 
-## Join the community
+All fields from the brief are kept as they are. These were added for the design:
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+| Field | Why |
+|---|---|
+| `subscription.status`, `renewsOn`, `expiredOn` | Tell an expired plan apart from no plan, and show when lessons refill |
+| `scheduledClass.startsInMin`, `durationMin`, `isLive` | Countdown and live state |
+| `progress.lessonsToNextLevel` | Shows the progress percentage as a number of lessons |
+| `skillSnapshot.lastCheckIn` | Context for `growthPercent` |
+| `dailyPractice.streakDays`, `week` | Streak and weekly progress |
+| `dailyPractice.tasks`, `estimatedMinutes`, `xpReward` | What today's practice contains |
+| `dailyPractice.score` | Data for View results |
